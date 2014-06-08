@@ -10,7 +10,11 @@
 	<h1>Project</h1>
 	<div>
 		<b>Project name: </b>
-		<div wicket:id="projectName"></div>
+		<form  wicket:id="form">
+			<input type="text" wicket:id="projectName" size="50" />
+			<!--   -->
+			<input type="submit" wicket:id="projectSubmit" value="submit" />
+		</form>
 	</div>
 	<a href="#" wicket:id="rootLink">goto root</a>
 </body>
