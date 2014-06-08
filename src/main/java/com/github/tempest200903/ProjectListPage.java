@@ -84,6 +84,27 @@ public class ProjectListPage extends WebPage {
 			Link<String> deleteProjectLink = new DeleteProjectLink(
 					"deleteProject", item);
 			item.add(deleteProjectLink);
+
+			Link<String> readProjectLink = new ReadProjectLink("readProject",
+					item);
+			item.add(readProjectLink);
+		}
+	}
+
+	private final class ReadProjectLink extends Link<String> {
+
+		private final Item<ProjectModel> item;
+
+		private static final long serialVersionUID = 1L;
+
+		private ReadProjectLink(String id, Item<ProjectModel> item) {
+			super(id);
+			this.item = item;
+		}
+
+		@Override
+		public void onClick() {
+			IModel<ProjectModel> model = item.getModel();
 		}
 	}
 

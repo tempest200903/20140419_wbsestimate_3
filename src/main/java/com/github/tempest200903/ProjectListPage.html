@@ -2,16 +2,9 @@
 <html xmlns:wicket="http://wicket.apache.org">
 <head>
 <meta charset="utf-8" />
-<title>WbsEstimate</title>
+<title>Top</title>
 </head>
 <style>
-projectName {
-	display: table-cell;
-}
-
-deleteProject {
-	display: table-cell;
-}
 </style>
 <body>
 	<h1>Project List</h1>
@@ -23,9 +16,12 @@ deleteProject {
 			<div style="display: table-cell;">
 				<b>Project name: </b>
 			</div>
-			<div wicket:id="projectName" class="projectName"></div>
-			<div class="deleteProject">
+			<div wicket:id="projectName" style="display: table-cell;"></div>
+			<div style="display: table-cell;">
 				<a wicket:id="deleteProject" href="#">delete project</a>
+			</div>
+			<div style="display: table-cell;">
+				<a wicket:id="readProject" href="#">read project</a>
 			</div>
 		</div>
 	</div>
