@@ -6,7 +6,17 @@
 </head>
 <body>
 	<h1>Project List</h1>
-	<!--   <div wicket:id="projectList"></div>-->
-	<a wicket:id="createProject" href="#">add</a>
+
+	<a wicket:id="createProject" href="#">createProject</a>
+
+	<div id="bd" style="display: table;">
+		<div wicket:id="projectList" style="display: table-row;">
+			<div style="display: table-cell;">
+				<b>Project name: </b>
+			</div>
+			<div wicket:id="projectName" style="display: table-cell;"></div>
+		</div>
+	</div>
+
 </body>
 </html>

@@ -18,6 +18,11 @@ public class ProjectModel implements Serializable {
 
 	private String name;
 
+	public ProjectModel(String name) {
+		super();
+		this.name = name;
+	}
+
 	@Id
 	@Property
 	public String getId() {
