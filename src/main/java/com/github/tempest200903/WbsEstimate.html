@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:wicket="http://wicket.apache.org">
+<head>
+<meta charset="utf-8" />
+<title>WbsEstimate</title>
+<style>
+div.formSection {
+	border: 1px solid #000000;
+}
+</style>
+</head>
+<body>
+	
+		<div class="formSection">
+			projectName: 
+			<input wicket:id="projectNameUI" type="text" /> 
+		</div>
+
+		<div class="formSection">
+			phaseName: 
+			<input wicket:id="phaseNameUI" type="text" /> 
+			<a wicket:id="phaseAdd" href="#">add</a>
+			<a wicket:id="phaseDelete" href="#">delete</a>
+		</div>
+		<p>
+	
+</body>
+</html>
