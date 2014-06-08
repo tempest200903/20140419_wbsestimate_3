@@ -18,6 +18,10 @@ public class ProjectModel implements Serializable {
 
 	private String name;
 
+	public ProjectModel() {
+		super();
+	}
+
 	public ProjectModel(String name) {
 		super();
 		this.name = name;
