@@ -23,16 +23,12 @@ public class ProjectListPage extends WebPage {
 			super(id);
 		}
 
-		private void createProject() {
+		@Override
+		public void onClick() {
 			String name = "Name TBD "
 					+ String.valueOf(System.currentTimeMillis());
 			ProjectModel p = new ProjectModel(name);
 			projectModelList.add(Model.of(p));
-		}
-
-		@Override
-		public void onClick() {
-			createProject();
 		}
 	}
 
@@ -49,27 +45,35 @@ public class ProjectListPage extends WebPage {
 		}
 
 		@Override
-		protected void populateItem(Item<ProjectModel> item) {
+		protected void populateItem(final Item<ProjectModel> item) {
 			PropertyModel<ProjectModel> model = new PropertyModel<ProjectModel>(
 					item.getModel(), "name");
 			item.add(new Label("projectName", model));
+
+			Link<String> deleteProjectLink = new Link<String>("deleteProject") {
+				private static final long serialVersionUID = 1L;
+
+				@Override
+				public void onClick() {
+					IModel<ProjectModel> model = item.getModel();
+					projectModelList.remove(model);
+				}
+			};
+			item.add(deleteProjectLink);
 		}
 	}
 
 	private static final long serialVersionUID = 1L;
 
-	final List<IModel<ProjectModel>> projectModelList;
+	final List<IModel<ProjectModel>> projectModelList = new ArrayList<IModel<ProjectModel>>();
 
 	Link<String> createProjectLink;
 
 	public ProjectListPage(final PageParameters parameters) {
 		super(parameters);
 
-		ProjectModel p1 = new ProjectModel("sample project 1");
-		ProjectModel p2 = new ProjectModel("sample project 2");
-		projectModelList = new ArrayList<IModel<ProjectModel>>();
-		projectModelList.add(Model.of(p1));
-		projectModelList.add(Model.of(p2));
+		projectModelList.add(Model.of(new ProjectModel("sample project 1")));
+		projectModelList.add(Model.of(new ProjectModel("sample project 2")));
 		add(new ProjectListView("projectList"));
 
 		createProjectLink = new CreateProjectLink("createProject");
