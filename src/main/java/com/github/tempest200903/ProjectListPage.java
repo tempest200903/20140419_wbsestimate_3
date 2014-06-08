@@ -17,7 +17,9 @@ import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 import com.googlecode.mjorm.MongoDao;
 import com.googlecode.mjorm.MongoDaoImpl;
+import com.googlecode.mjorm.ObjectIterator;
 import com.googlecode.mjorm.annotations.AnnotationsDescriptorObjectMapper;
+import com.googlecode.mjorm.query.DaoQuery;
 import com.mongodb.DB;
 import com.mongodb.Mongo;
 
@@ -65,6 +67,7 @@ public class ProjectListPage extends WebPage {
 				public void onClick() {
 					IModel<ProjectModel> model = item.getModel();
 					projectModelList.remove(model);
+					save();
 				}
 			};
 			item.add(deleteProjectLink);
@@ -77,37 +80,59 @@ public class ProjectListPage extends WebPage {
 
 	private transient Mongo mongo;
 
+	private transient MongoDao dao;
+
+	private String projectCollection = "project";
+
 	public ProjectListPage(final PageParameters parameters)
 			throws UnknownHostException {
 		super(parameters);
 
-		mongo = new Mongo();
+		setupMongo();
 
-		projectModelList.add(Model.of(new ProjectModel("sample project 1")));
-		projectModelList.add(Model.of(new ProjectModel("sample project 2")));
+		load();
+		if (false) {
+			projectModelList
+					.add(Model.of(new ProjectModel("sample project 1")));
+			projectModelList
+					.add(Model.of(new ProjectModel("sample project 2")));
+		}
 		add(new ProjectListView("projectList"));
 
 		Link<String> createProjectLink = new CreateProjectLink("createProject");
 		add(createProjectLink);
 	}
 
-	void save() {
+	private void load() {
+		System.out.println("load begin");
+		DaoQuery query = dao.createQuery();
+		query.setCollection(projectCollection);
+		query.ne("name", "sample project 1");
+		ObjectIterator<ProjectModel> it = query.findObjects(ProjectModel.class);
+		for (ProjectModel projectModel : it) {
+			System.out.println("person = {  " + projectModel + "  }");
+			projectModelList.add(Model.of(projectModel));
+		}
+		System.out.println("load end");
+	}
+
+	private void save() {
 		System.out.println("save begin");
-
-		AnnotationsDescriptorObjectMapper mapper = new AnnotationsDescriptorObjectMapper();
-		mapper.addClass(ProjectModel.class);
-		DB db = mongo.getDB("wbsestimate");
-		MongoDao dao = new MongoDaoImpl(db, mapper);
-		String collection = "project";
-
 		int size = projectModelList.size();
 		for (int i = 0; i < size; i++) {
 			IModel<ProjectModel> model = projectModelList.get(i);
 			ProjectModel projectModel = model.getObject();
-			dao.createObject(collection, projectModel);
+			dao.createObject(projectCollection, projectModel);
 		}
-
 		System.out.println("save end");
+	}
+
+	private void setupMongo() throws UnknownHostException {
+		mongo = new Mongo();
+		AnnotationsDescriptorObjectMapper mapper = new AnnotationsDescriptorObjectMapper();
+		mapper.addClass(ProjectModel.class);
+		DB db = mongo.getDB("wbsestimate");
+		dao = new MongoDaoImpl(db, mapper);
 	}
 
 }
