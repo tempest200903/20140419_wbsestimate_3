@@ -4,6 +4,15 @@
 <meta charset="utf-8" />
 <title>WbsEstimate</title>
 </head>
+<style>
+projectName {
+	display: table-cell;
+}
+
+deleteProject {
+	display: table-cell;
+}
+</style>
 <body>
 	<h1>Project List</h1>
 
@@ -14,8 +23,10 @@
 			<div style="display: table-cell;">
 				<b>Project name: </b>
 			</div>
-			<div wicket:id="projectName" style="display: table-cell;"></div>
-			<a wicket:id="deleteProject" href="#">delete project</a>
+			<div wicket:id="projectName" class="projectName"></div>
+			<div class="deleteProject">
+				<a wicket:id="deleteProject" href="#">delete project</a>
+			</div>
 		</div>
 	</div>
 

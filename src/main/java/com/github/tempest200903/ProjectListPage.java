@@ -20,9 +20,7 @@ import com.googlecode.mjorm.MongoDaoImpl;
 import com.googlecode.mjorm.ObjectIterator;
 import com.googlecode.mjorm.annotations.AnnotationsDescriptorObjectMapper;
 import com.googlecode.mjorm.query.DaoQuery;
-import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
-import com.mongodb.DBCollection;
 import com.mongodb.Mongo;
 
 public class ProjectListPage extends WebPage {
@@ -112,6 +110,12 @@ public class ProjectListPage extends WebPage {
 		add(createProjectLink);
 	}
 
+	private void deleteProject(String id) {
+		System.out.println("deleteProject begin");
+		dao.deleteObject(projectCollection, id);
+		System.out.println("deleteProject end");
+	}
+
 	private void loadProject() {
 		System.out.println("load begin");
 		DaoQuery query = dao.createQuery();
@@ -123,19 +127,6 @@ public class ProjectListPage extends WebPage {
 			projectModelList.add(Model.of(projectModel));
 		}
 		System.out.println("load end");
-	}
-
-	private void deleteProject(String id) {
-		System.out.println("deleteProject begin");
-		if (false) {
-			BasicDBObject document = new BasicDBObject();
-			document.put("id", id);
-			DB db = mongo.getDB("mydb");
-			DBCollection collection = db.getCollection(projectCollection);
-			collection.remove(document);
-		}
-		dao.deleteObject(projectCollection, id);
-		System.out.println("deleteProject end");
 	}
 
 	private void saveProject() {
