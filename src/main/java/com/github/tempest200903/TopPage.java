@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.repeater.Item;
 import org.apache.wicket.markup.repeater.RefreshingView;
@@ -23,7 +24,7 @@ import com.googlecode.mjorm.query.DaoQuery;
 import com.mongodb.DB;
 import com.mongodb.Mongo;
 
-public class ProjectListPage extends WebPage {
+public class TopPage extends WebPage {
 
 	private final class CreateProjectLink extends Link<String> {
 		private static final long serialVersionUID = 1L;
@@ -91,21 +92,23 @@ public class ProjectListPage extends WebPage {
 		}
 	}
 
-	private final class ReadProjectLink extends Link<String> {
-
-		private final Item<ProjectModel> item;
+	private static final class ReadProjectLink extends Link<String> {
 
 		private static final long serialVersionUID = 1L;
 
-		private ReadProjectLink(String id, Item<ProjectModel> item) {
+		private Item<ProjectModel> item;
+
+		public ReadProjectLink(String id, Item<ProjectModel> item) {
 			super(id);
 			this.item = item;
 		}
 
 		@Override
 		public void onClick() {
-			IModel<ProjectModel> model = item.getModel();
+			WebPage next = new ProjectPage(item);
+			setResponsePage(next);
 		}
+
 	}
 
 	private static final long serialVersionUID = 1L;
@@ -118,8 +121,7 @@ public class ProjectListPage extends WebPage {
 
 	private String projectCollection = "project";
 
-	public ProjectListPage(final PageParameters parameters)
-			throws UnknownHostException {
+	public TopPage(final PageParameters parameters) throws UnknownHostException {
 		super(parameters);
 
 		setupMongo();
