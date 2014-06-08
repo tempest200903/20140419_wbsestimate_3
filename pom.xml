@@ -89,6 +89,14 @@ limitations under the License.
       <version>${jetty.version}</version>
       <scope>provided</scope>
     </dependency>
+
+    <!-- mongo-java-orm -->
+    <dependency>
+      <groupId>com.googlecode</groupId>
+      <artifactId>mongo-java-orm</artifactId>
+      <version>1.2</version>
+    </dependency>
+
   </dependencies>
   <build>
     <resources>
@@ -170,6 +178,7 @@ limitations under the License.
   </build>
 
   <repositories>
+    <!-- Apache Wicket -->
     <repository>
       <id>Apache Nexus</id>
       <url>https://repository.apache.org/content/repositories/snapshots/</url>
@@ -179,6 +188,13 @@ limitations under the License.
       <snapshots>
 	<enabled>true</enabled>
       </snapshots>
+    </repository>
+    <!-- mongo-java-orm -->
+    <repository>
+      <id>mjorm-webdav-maven-repo</id>
+      <name>mjorm maven repository</name>
+      <url>http://mongo-java-orm.googlecode.com/svn/maven/repo/</url>
+      <layout>default</layout>
     </repository>
   </repositories>
 </project>
