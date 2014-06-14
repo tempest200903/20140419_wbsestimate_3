@@ -91,7 +91,7 @@ public class TopPage extends WebPage {
 		}
 	}
 
-	private static final class ReadProjectLink extends Link<String> {
+	private final class ReadProjectLink extends Link<String> {
 
 		private static final long serialVersionUID = 1L;
 
@@ -104,7 +104,7 @@ public class TopPage extends WebPage {
 
 		@Override
 		public void onClick() {
-			WebPage next = new ProjectPage(item);
+			WebPage next = new ProjectPage(dao, item);
 			setResponsePage(next);
 		}
 

@@ -8,11 +8,18 @@ import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.repeater.Item;
 import org.apache.wicket.model.Model;
 
+import com.googlecode.mjorm.MongoDao;
+
 public class ProjectPage extends WebPage {
 
 	private static final long serialVersionUID = 1L;
 
-	public ProjectPage(Item<ProjectModel> item) {
+	private String projectCollection = "project";
+
+	private transient MongoDao dao_;
+
+	public ProjectPage(final MongoDao dao, Item<ProjectModel> item) {
+		this.dao_ = dao;
 		final ProjectModel projectModel = item.getModelObject();
 		String projectName = projectModel.getName();
 
@@ -45,6 +52,14 @@ public class ProjectPage extends WebPage {
 			public void onSubmit() {
 				String projectName = projectNameTextField.getValue();
 				projectModel.setName(projectName);
+
+				String id = projectModel.getId();
+				// TODO 変更後の　projectModel　オブジェクトをデータベースに保存する。
+				if (false) {
+					dao_.updateObject(projectCollection, id, projectModel);
+				}
+				dao_.savePartialObject(projectCollection, id, "name",
+						projectName, true);
 			}
 		};
 		form.add(projectSubmitButton);
