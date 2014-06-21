@@ -26,7 +26,8 @@ public class TopPage extends WebPage {
 			Link<String> createProject = new Link<String>("createProject") {
 				@Override
 				public void onClick() {
-					// TODO Auto-generated method stub
+					ProjectModel projectModel = new ProjectModel();
+					projectModelList.add(projectModel);
 				}
 			};
 			add(createProject);
