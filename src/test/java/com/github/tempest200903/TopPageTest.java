@@ -7,6 +7,10 @@ import org.apache.wicket.util.tester.WicketTester;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.hamcrest.CoreMatchers.is;
+
+import static org.junit.Assert.*;
+
 /**
  * Simple test using the WicketTester
  */
@@ -25,15 +29,23 @@ public class TopPageTest {
 	@Test
 	public void topPageClickCreateProject() {
 		// start and render the test page
-		tester.startPage(TopPage.class);
+		TopPage topPage = tester.startPage(TopPage.class);
 
 		// assert rendered page class
 		tester.assertRenderedPage(TopPage.class);
+
+		int sizeBeforeClick = topPage.projectModelList.size();
 
 		Component createProjectLink = tester
 				.getComponentFromLastRenderedPage("createProject");
 		myLogger.info("createProjectLink =: " + createProjectLink);
 		tester.clickLink(createProjectLink);
+		{
+			// projectModelList に要素が1個増えている
+			int expected = sizeBeforeClick + 1;
+			int actual = topPage.projectModelList.size();
+			assertThat(actual, is(expected));
+		}
 	}
 
 	@Test
