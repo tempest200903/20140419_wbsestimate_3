@@ -8,13 +8,8 @@ import org.junit.Test;
  * Simple test using the WicketTester
  */
 public class TopPageTest {
-	
-	private WicketTester tester;
 
-	@Before
-	public void setUp() {
-		tester = new WicketTester(new WicketApplication());
-	}
+	private WicketTester tester;
 
 	@Test
 	public void homepageRendersSuccessfully() {
@@ -23,5 +18,10 @@ public class TopPageTest {
 
 		// assert rendered page class
 		tester.assertRenderedPage(TopPage.class);
+	}
+
+	@Before
+	public void setUp() {
+		tester = new WicketTester(new WicketApplication());
 	}
 }
