@@ -89,6 +89,23 @@ limitations under the License.
       <version>${jetty.version}</version>
       <scope>provided</scope>
     </dependency>
+
+    <!-- cf. http://mvnrepository.com/artifact/org.mongodb/mongo-java-driver/2.12.2 -->
+    <!-- Maven Repository: org.mongodb » mongo-java-driver » 2.12.2 -->
+    <dependency>
+      <groupId>org.mongodb</groupId>
+      <artifactId>mongo-java-driver</artifactId>
+      <version>2.12.2</version>
+    </dependency>
+
+    <!-- cf. http://dayafterneet.blogspot.jp/2012/02/mongodbjavamorphia.html -->
+    <!-- Day After Neet: MongoDBのJava向け操作ライブラリ「Morphia」 -->
+    <dependency>
+      <groupId>com.google.code.morphia</groupId>
+      <artifactId>morphia</artifactId>
+      <version>0.99</version>
+    </dependency>
+
   </dependencies>
   <build>
     <resources>
@@ -163,6 +180,7 @@ limitations under the License.
 	<version>2.9</version>
 	<configuration>
 	  <downloadSources>true</downloadSources>
+          <downloadJavadocs>true</downloadJavadocs>
 	  <wtpversion>${wtp.version}</wtpversion>
 	</configuration>
       </plugin>
@@ -180,5 +198,14 @@ limitations under the License.
 	<enabled>true</enabled>
       </snapshots>
     </repository>
+
+    <!-- cf. http://dayafterneet.blogspot.jp/2012/02/mongodbjavamorphia.html -->
+    <!-- Day After Neet: MongoDBのJava向け操作ライブラリ「Morphia」 -->
+    <repository>
+      <id>morphia.googlecode.com</id>
+      <name>Morphia Repo at Google Code</name>
+      <url>http://morphia.googlecode.com/svn/mavenrepo</url>
+    </repository>
+
   </repositories>
 </project>
