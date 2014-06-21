@@ -1,5 +1,7 @@
 # 20140621-wbsestimate-7 #
 
+## timelog ##
+
 - [2014-06-21 土 18:14] begin
 - [2014-06-21 土 18:53] end
 - [2014-06-21 土 20:45] begin
@@ -65,7 +67,7 @@
     - つまり git push (remote) (branch) を実行します。
 - git push morphia_first morphia_first
 
-    > # git push morphia_first morphia_first
+    > $ git push morphia_first morphia_first
     > fatal: 'morphia_first' does not appear to be a git repository
     > fatal: Could not read from remote repository.
     > 
@@ -77,11 +79,11 @@
     - ブランチ名を入力する。 Create branch をクリックする。
     - file:F:\goat-pc-data\screenshot\2014\screenshot-g-000107.jpg
 
-        > # git fetch
+        > $ git fetch
         > From https://github.com/tempest200903/20140419_wbsestimate_3
         >  * [new branch]      morphia_first -> origin/morphia_first
         > 
-        > # git push morphia_first morphia_first
+        > $ git push morphia_first morphia_first
         > fatal: 'morphia_first' does not appear to be a git repository
         > fatal: Could not read from remote repository.
         > 
@@ -97,11 +99,11 @@
 - git fetch
 - git push origin/morphia_first morphia_first
 
-    > # git fetch
+    > $ git fetch
     > From https://github.com/tempest200903/20140419_wbsestimate_3
     >  + a4f2797...10fe807 morphia_first -> origin/morphia_first  (forced update)
     > 
-    > # git push origin/morphia_first morphia_first
+    > $ git push origin/morphia_first morphia_first
     > fatal: 'origin/morphia_first' does not appear to be a git repository
     > fatal: Could not read from remote repository.
     > 
@@ -110,7 +112,7 @@
 
 - git push
 
-    > # git push
+    > $ git push
     > To https://github.com/tempest200903/20140419_wbsestimate_3
     >    10fe807..d81fa3c  morphia_first -> morphia_first
 
@@ -197,3 +199,5 @@
 ## save wiki ##
 
 - F:\goat-pc-data\ecworkspace\20140621-wbsestimate-7\wiki\20140621-wbsestimate-7.md
+- https://github.com/tempest200903/20140419_wbsestimate_3/blob/morphia_first/wiki/20140621-wbsestimate-7.md
+
