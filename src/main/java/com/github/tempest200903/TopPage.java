@@ -24,6 +24,8 @@ public class TopPage extends WebPage {
 
 		{
 			Link<String> createProject = new Link<String>("createProject") {
+				private static final long serialVersionUID = 1L;
+
 				@Override
 				public void onClick() {
 					ProjectModel projectModel = new ProjectModel();
