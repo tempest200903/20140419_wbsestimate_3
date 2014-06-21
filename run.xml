@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- ====================================================================== -->
+<!-- Ant build file (http://ant.apache.org/) for Ant 1.6.2 or above.        -->
+<!-- ====================================================================== -->
+
+<project name="run" default="run" basedir=".">
+
+	<target name="run">
+		<echo>run</echo>
+		<exec executable="C:\tool\Maven\apache-maven-3.1.1\bin\mvn.bat">
+			<arg line="package jetty:run" />
+		</exec>
+	</target>
+
+</project>
