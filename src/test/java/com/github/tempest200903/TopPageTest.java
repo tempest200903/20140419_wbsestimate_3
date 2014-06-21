@@ -46,6 +46,16 @@ public class TopPageTest {
 			int actual = topPage.projectModelList.size();
 			assertThat(actual, is(expected));
 		}
+
+		HomePage homePage = tester.startPage(HomePage.class);
+		TopPage topPage2 = tester.startPage(TopPage.class);
+		tester.assertRenderedPage(TopPage.class);
+		{
+			// projectModelList を永続化していることをテストする。
+			int expected = sizeBeforeClick + 1;
+			int actual = topPage2.projectModelList.size();
+			assertThat(actual, is(expected));
+		}
 	}
 
 	@Test

@@ -9,12 +9,17 @@ import com.google.code.morphia.Key;
 import com.google.code.morphia.Morphia;
 import com.mongodb.Mongo;
 
+/**
+ *
+ */
 public class ProjectModelTest {
 
-	Datastore datastore;
+	private Datastore datastore;
 
 	private ProjectModel createExpectedProjectModel() {
-		return new ProjectModel();
+		ProjectModel projectModel = new ProjectModel();
+		projectModel.setTitle("abc");
+		return projectModel;
 	}
 
 	@Before
