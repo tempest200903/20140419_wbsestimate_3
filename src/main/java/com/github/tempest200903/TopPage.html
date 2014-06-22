@@ -6,7 +6,30 @@
 </head>
 <body>
 	<h1>Project List</h1>
+	<!--  
 	<div wicket:id="projectList"></div>
+	  -->
+
+	<div id="bd" style="display: table;">
+		<div wicket:id="projectList" style="display: table-row;">
+			<div style="display: table-cell;">
+				<b>Project name: </b>
+			</div>
+			<div wicket:id="projectTitle" style="display: table-cell;"></div>
+			<!--  
+			|
+			<div style="display: table-cell;">
+				<a wicket:id="deleteProject" href="#">delete project</a>
+			</div>
+			|
+			<div style="display: table-cell;">
+				<a wicket:id="readProject" href="#">read project</a>
+			</div>
+			  -->
+		</div>
+	</div>
+
+
 	<a wicket:id="createProject" href="#">create project</a>
 </body>
 </html>
