@@ -3,6 +3,8 @@ package com.github.tempest200903;
 import java.util.logging.Logger;
 
 import org.apache.wicket.Component;
+import org.apache.wicket.model.IModel;
+import org.apache.wicket.model.Model;
 import org.apache.wicket.util.tester.WicketTester;
 import org.junit.Before;
 import org.junit.Test;
@@ -44,7 +46,24 @@ public class TopPageTest {
 			// projectModelList に要素が1個増えている
 			int expected = sizeBeforeClick + 1;
 			int actual = topPage.projectModelList.size();
-			assertThat(actual, is(expected));
+			assertThat("projectModelList.size()", actual, is(expected));
+		}
+		{
+			// wicketProjectModelList に要素が1個増えている
+			int expected = sizeBeforeClick + 1;
+			int actual = topPage.wicketProjectModelList.size();
+			assertThat("wicketProjectModelList.size()", actual, is(expected));
+		}
+		{
+			// projectModelList 最後の要素の title を wicketProjectModelList
+			// 最後の要素に表示している。
+			ProjectModel lastProjectModel = topPage.projectModelList
+					.get(topPage.projectModelList.size() - 1);
+			IModel<ProjectModel> lastWicketProjectModel = topPage.wicketProjectModelList
+					.get(topPage.wicketProjectModelList.size() - 1);
+			String expected = lastProjectModel.getTitle();
+			String actual = lastWicketProjectModel.getObject().getTitle();
+			assertThat("getTitle()", actual, is(expected));
 		}
 
 		HomePage homePage = tester.startPage(HomePage.class);

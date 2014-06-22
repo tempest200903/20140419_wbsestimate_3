@@ -75,7 +75,7 @@ public class TopPage extends WebPage {
 					String title = "project unknown "
 							+ (System.currentTimeMillis() % 10000);
 					projectModel.setTitle(title);
-					projectModelList.add(projectModel);
+					addProjectModel(projectModel);
 					myLogger.info("projectModelList.size() =: "
 							+ projectModelList.size());
 					save();
@@ -101,12 +101,17 @@ public class TopPage extends WebPage {
 
 	void load() {
 		Query<ProjectModel> query = getDatastore().find(ProjectModel.class);
-		projectModelList = new ArrayList<ProjectModel>(query.asList());
-		for (ProjectModel projectModel : projectModelList) {
-			Model<ProjectModel> model = org.apache.wicket.model.Model
-					.of(projectModel);
-			wicketProjectModelList.add(model);
+		List<ProjectModel> queryProjectModelList = new ArrayList<ProjectModel>(
+				query.asList());
+		for (ProjectModel projectModel : queryProjectModelList) {
+			addProjectModel(projectModel);
 		}
+	}
+
+	private void addProjectModel(ProjectModel projectModel) {
+		projectModelList.add(projectModel);
+		Model<ProjectModel> model = Model.of(projectModel);
+		wicketProjectModelList.add(model);
 	}
 
 	void save() {
