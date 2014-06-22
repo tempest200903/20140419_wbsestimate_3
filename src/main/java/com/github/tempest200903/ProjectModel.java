@@ -13,6 +13,8 @@ import com.google.code.morphia.annotations.Id;
 @Entity
 public class ProjectModel implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	ObjectId oid;
 

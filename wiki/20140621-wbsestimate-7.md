@@ -6,6 +6,12 @@
 - [2014-06-21 土 18:53] end
 - [2014-06-21 土 20:45] begin
 - [2014-06-21 土 23:21] end
+- [2014-06-22 日 18:26] begin
+- [2014-06-22 日 18:53] end
+- [2014-06-22 日 20:25] begin
+- [2014-06-22 日 20:56] end
+- [2014-06-22 日 22:23] begin
+- [2014-06-22 日 23:30] end
 
 ## links ##
 
@@ -195,6 +201,46 @@
 
 - [2014-06-21 土 23:18] commit https://github.com/tempest200903/20140419_wbsestimate_3/commit/eda37657b90f5772091acc0e220349f99ee933d2
 - git push
+- 厳密に永続化テストするには、一度 JavaVM プロセスを終了して、再度プログラムを起動してから、復元できているかを検査するべき。 JUnit でこれを行うのはやや手間がかかるので、今回は簡略検査だけにする。
+
+## TopPageTest new する時に projectModelList を表示する。 ##
+
+- file:F:\goat-pc-data\screenshot\2014\screenshot-g-000113.jpg
+- 初回アクセス時に projectModelList を表示する。
+- 課題
+    - create project をクリックしても表示が変化しない。内部では増えている。
+    - reload しても表示が変化しない。
+    - mongodb オブジェクトと morphia オブジェクトの初期化は class TopPage ではなく、 class WicketApplication で行うべき。
+- [2014-06-22 日 18:53] commit https://github.com/tempest200903/20140419_wbsestimate_3/commit/899f700a74c0f4282bf9277e54435348d036d80c
+
+## WicketApplication で mongodb オブジェクトと morphia オブジェクトを初期化する。 ##
+
+- WicketApplication インスタンスを得るにはどうすればいいのか？
+    - 多分、これ。 org.apache.wicket.protocol.http.WebApplication.get()
+- [2014-06-22 日 20:42] commit https://github.com/tempest200903/20140419_wbsestimate_3/commit/57dfcc6573c476a0d001897f1232652feaa21437
+
+## create project をクリックしたとき表示を更新する。 ##
+
+- com.github.tempest200903.TopPage.TopPage(...).new Link() {...}.onClick()
+    - projectModelList.add(projectModel) と同時に、
+      wicketProjectModelList.add(model) も行う。
+- [2014-06-22 日 20:55] commit https://github.com/tempest200903/20140419_wbsestimate_3/commit/14668b92cd4210d48dd02a18cf1e9cd9357440c2
+
+## dependency 追加 org.apache.commons commons-collections4 ##
+
+- F:\goat-pc-data\ecworkspace\20140621-wbsestimate-7\pom.xml
+    - dependency 追加
+        - http://commons.apache.org/proper/commons-collections/project-summary.html
+        - GroupId	org.apache.commons
+        - ArtifactId	commons-collections4
+
+## delete project をクリックしたとき projectModelList から除去して表示を更新する。 ##
+
+- RefreshingView から子 component を探し出すことはできたが、やや手間がかかる。
+    - see com.github.tempest200903.TopPageTest.findDeleteProjectLink(ProjectListView)
+- 課題
+    - delete project をクリックしたとき画面では project list から item が1個減っている。データベースには保存していない。再起動したら削除したつもりの item が残っている。
+- [2014-06-22 日 23:30] commit
 
 ## save wiki ##
 

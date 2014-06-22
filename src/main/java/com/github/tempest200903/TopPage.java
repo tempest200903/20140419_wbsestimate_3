@@ -22,7 +22,7 @@ import com.google.code.morphia.query.Query;
 
 public class TopPage extends WebPage {
 
-	private final class ProjectListView extends RefreshingView<ProjectModel> {
+	final class ProjectListView extends RefreshingView<ProjectModel> {
 
 		private static final long serialVersionUID = 1L;
 
@@ -41,14 +41,35 @@ public class TopPage extends WebPage {
 					item.getModel(), "title");
 			item.add(new Label("projectTitle", model));
 
-			// Link<String> deleteProjectLink = new DeleteProjectLink(
-			// "deleteProject", item);
-			// item.add(deleteProjectLink);
-			//
+			Link<String> deleteProjectLink = new DeleteProjectLink(
+					"deleteProject", item);
+			item.add(deleteProjectLink);
+
 			// Link<String> readProjectLink = new ReadProjectLink("readProject",
 			// item);
 			// item.add(readProjectLink);
 		}
+	}
+
+	private final class DeleteProjectLink extends Link<String> {
+
+		private final Item<ProjectModel> item;
+
+		private static final long serialVersionUID = 1L;
+
+		private DeleteProjectLink(String id, Item<ProjectModel> item) {
+			super(id);
+			this.item = item;
+		}
+
+		@Override
+		public void onClick() {
+			IModel<ProjectModel> model = item.getModel();
+			wicketProjectModelList.remove(model);
+			projectModelList.remove(model.getObject());
+			save();
+		}
+
 	}
 
 	private static final Logger myLogger = Logger.getLogger(TopPage.class
