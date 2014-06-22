@@ -234,16 +234,19 @@
         - GroupId	org.apache.commons
         - ArtifactId	commons-collections4
 
+- [2014-06-22 日 23:25] commit https://github.com/tempest200903/20140419_wbsestimate_3/commit/9de58046f0a4a8dea64f6f3ef17eed5db3fdf4a9
+
 ## delete project をクリックしたとき projectModelList から除去して表示を更新する。 ##
 
 - RefreshingView から子 component を探し出すことはできたが、やや手間がかかる。
     - see com.github.tempest200903.TopPageTest.findDeleteProjectLink(ProjectListView)
 - 課題
     - delete project をクリックしたとき画面では project list から item が1個減っている。データベースには保存していない。再起動したら削除したつもりの item が残っている。
-- [2014-06-22 日 23:30] commit
+- [2014-06-22 日 23:30] commit https://github.com/tempest200903/20140419_wbsestimate_3/commit/76c912f5aefbfc32de617deb5083ac4b6e34baae
 
 ## save wiki ##
 
 - F:\goat-pc-data\ecworkspace\20140621-wbsestimate-7\wiki\20140621-wbsestimate-7.md
 - https://github.com/tempest200903/20140419_wbsestimate_3/blob/morphia_first/wiki/20140621-wbsestimate-7.md
+- [2014-06-22 日 23:32] commit
 
