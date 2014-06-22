@@ -14,12 +14,11 @@ import org.apache.wicket.markup.repeater.RefreshingView;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
+import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 import com.google.code.morphia.Datastore;
-import com.google.code.morphia.Morphia;
 import com.google.code.morphia.query.Query;
-import com.mongodb.Mongo;
 
 public class TopPage extends WebPage {
 
@@ -61,15 +60,9 @@ public class TopPage extends WebPage {
 
 	final List<IModel<ProjectModel>> wicketProjectModelList = new ArrayList<IModel<ProjectModel>>();
 
-	private transient Datastore datastore;
-
 	public TopPage(final PageParameters parameters) throws UnknownHostException {
 		super(parameters);
 
-		if (false) {
-			Label projectList = new Label("projectList");
-			add(projectList);
-		}
 		add(new ProjectListView("projectList"));
 
 		{
@@ -92,14 +85,22 @@ public class TopPage extends WebPage {
 			add(createProject);
 		}
 
-		setupDatastore();
 		load();
 
 		myLogger.info("projectModelList.size() =: " + projectModelList.size());
 	}
 
+	private Datastore getDatastore() {
+		WebApplication webApplication = WebApplication.get();
+		if (webApplication instanceof WicketApplication) {
+			WicketApplication wicketApplication = (WicketApplication) webApplication;
+			return wicketApplication.getDatastore();
+		}
+		throw new RuntimeException("missing WicketApplication");
+	}
+
 	void load() {
-		Query<ProjectModel> query = datastore.find(ProjectModel.class);
+		Query<ProjectModel> query = getDatastore().find(ProjectModel.class);
 		projectModelList = new ArrayList<ProjectModel>(query.asList());
 		for (ProjectModel projectModel : projectModelList) {
 			Model<ProjectModel> model = org.apache.wicket.model.Model
@@ -109,17 +110,7 @@ public class TopPage extends WebPage {
 	}
 
 	void save() {
-		datastore.save(projectModelList);
-	}
-
-	public void setupDatastore() throws UnknownHostException {
-		String mongoServer = "localhost";
-		@SuppressWarnings("deprecation")
-		Mongo mongo = new Mongo(mongoServer);
-		Morphia morphia = new Morphia();
-		morphia.map(ProjectModel.class);
-		String dbName = "wbsestimate";
-		datastore = morphia.createDatastore(mongo, dbName);
+		getDatastore().save(projectModelList);
 	}
 
 }
