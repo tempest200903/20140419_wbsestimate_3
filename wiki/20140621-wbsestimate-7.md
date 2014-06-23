@@ -1,18 +1,5 @@
 # 20140621-wbsestimate-7 #
 
-## timelog ##
-
-- [2014-06-21 土 18:14] begin
-- [2014-06-21 土 18:53] end
-- [2014-06-21 土 20:45] begin
-- [2014-06-21 土 23:21] end
-- [2014-06-22 日 18:26] begin
-- [2014-06-22 日 18:53] end
-- [2014-06-22 日 20:25] begin
-- [2014-06-22 日 20:56] end
-- [2014-06-22 日 22:23] begin
-- [2014-06-22 日 23:30] end
-
 ## links ##
 
 - comefrom: [[20140614-wbsestimate-6]]
@@ -250,3 +237,42 @@
 - https://github.com/tempest200903/20140419_wbsestimate_3/blob/morphia_first/wiki/20140621-wbsestimate-7.md
 - [2014-06-22 日 23:32] commit
 
+## Morphia DAO を使う。 ##
+
+- http://dayafterneet.blogspot.jp/2012/02/mongodbjavamorphia.html
+- [2014-06-23 月 19:16] commit
+
+## delete project をクリックしたときデータベースからも削除する。 ##
+
+- save() で getDatastore().save(projectModelList); としてる。削除対象オブジェクトを保持しておいて、ここで削除する。
+- [2014-06-23 月 22:57] commit
+
+## TopPage に project の個数を表示する。 ##
+
+- TopPage.addProjectListSizeLabel()
+- [2014-06-23 月 23:05] commit
+
+## リファクタリング Extract Method TopPage コンストラクタ ##
+
+- [2014-06-23 月 23:08] commit
+
+## read project link をクリックしたら ProjectPage に遷移する。 ##
+
+- [2014-06-23 月 23:26] commit
+
+## timelog ##
+
+- [2014-06-21 土 18:14] begin
+- [2014-06-21 土 18:53] end
+- [2014-06-21 土 20:45] begin
+- [2014-06-21 土 23:21] end
+- [2014-06-22 日 18:26] begin
+- [2014-06-22 日 18:53] end
+- [2014-06-22 日 20:25] begin
+- [2014-06-22 日 20:56] end
+- [2014-06-22 日 22:23] begin
+- [2014-06-22 日 23:30] end
+- [2014-06-23 月 18:25] begin
+- [2014-06-23 月 19:17] end
+- [2014-06-23 月 22:48] begin
+- [2014-06-23 月 23:27] end
