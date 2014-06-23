@@ -11,6 +11,7 @@ import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.repeater.Item;
 import org.apache.wicket.markup.repeater.RefreshingView;
+import org.apache.wicket.model.AbstractReadOnlyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
@@ -20,6 +21,9 @@ import org.apache.wicket.request.mapper.parameter.PageParameters;
 import com.google.code.morphia.Datastore;
 import com.google.code.morphia.query.Query;
 
+/**
+ *
+ */
 public class TopPage extends WebPage {
 
 	private final class DeleteProjectLink extends Link<String> {
@@ -86,6 +90,8 @@ public class TopPage extends WebPage {
 	public TopPage(final PageParameters parameters) throws UnknownHostException {
 		super(parameters);
 
+		addProjectListSizeLabel();
+
 		add(new ProjectListView("projectList"));
 
 		{
@@ -111,6 +117,19 @@ public class TopPage extends WebPage {
 		load();
 
 		myLogger.info("projectModelList.size() =: " + projectModelList.size());
+	}
+
+	private void addProjectListSizeLabel() {
+		AbstractReadOnlyModel<String> model = new AbstractReadOnlyModel<String>() {
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public String getObject() {
+				return String.valueOf(projectModelList.size()) + " projects";
+			}
+		};
+		Label label = new Label("projectListSize", model);
+		add(label);
 	}
 
 	private void addProjectModel(ProjectModel projectModel) {
