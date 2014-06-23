@@ -72,10 +72,29 @@ public class TopPage extends WebPage {
 					"deleteProject", item);
 			item.add(deleteProjectLink);
 
-			// Link<String> readProjectLink = new ReadProjectLink("readProject",
-			// item);
-			// item.add(readProjectLink);
+			Link<String> readProjectLink = new ReadProjectLink("readProject",
+					item);
+			item.add(readProjectLink);
 		}
+	}
+
+	private final class ReadProjectLink extends Link<String> {
+
+		private static final long serialVersionUID = 1L;
+
+		private Item<ProjectModel> item;
+
+		public ReadProjectLink(String id, Item<ProjectModel> item) {
+			super(id);
+			this.item = item;
+		}
+
+		@Override
+		public void onClick() {
+			 WebPage next = new ProjectPage(item);
+			 setResponsePage(next);
+		}
+
 	}
 
 	private static final Logger myLogger = Logger.getLogger(TopPage.class
