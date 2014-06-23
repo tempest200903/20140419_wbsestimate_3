@@ -37,7 +37,9 @@ public class TopPage extends WebPage {
 		public void onClick() {
 			IModel<ProjectModel> model = item.getModel();
 			wicketProjectModelList.remove(model);
-			projectModelList.remove(model.getObject());
+			ProjectModel projectModel = model.getObject();
+			projectModelList.remove(projectModel);
+			getProjectModelDAO().delete(projectModel);
 			save();
 		}
 

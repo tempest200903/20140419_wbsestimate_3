@@ -134,6 +134,16 @@ public class TopPageTest {
 			int actual = topPage.wicketProjectModelList.size();
 			assertThat("wicketProjectModelList.size()", actual, is(expected));
 		}
+		tester.startPage(HomePage.class);
+		TopPage topPage2 = tester.startPage(TopPage.class);
+		tester.assertRenderedPage(TopPage.class);
+		{
+			// projectModelList に要素が1個減っている
+			int expected = sizeBeforeClick - 1;
+			int actual = topPage2.projectModelList.size();
+			assertThat("projectModelList.size()", actual, is(expected));
+		}
+		// TODO 削除した projectModel が projectModelList に含まれていないことを検査する。
 
 		myLogger.info("topPageClickDeleteProject end");
 	}
