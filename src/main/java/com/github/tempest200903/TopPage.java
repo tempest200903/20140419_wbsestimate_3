@@ -94,29 +94,31 @@ public class TopPage extends WebPage {
 
 		add(new ProjectListView("projectList"));
 
-		{
-			Link<String> createProject = new Link<String>("createProject") {
-				private static final long serialVersionUID = 1L;
-
-				@Override
-				public void onClick() {
-					ProjectModel projectModel = new ProjectModel();
-					String title = "project unknown "
-							+ (System.currentTimeMillis() % 10000);
-					projectModel.setTitle(title);
-					addProjectModel(projectModel);
-					myLogger.info("projectModelList.size() =: "
-							+ projectModelList.size());
-					save();
-				}
-
-			};
-			add(createProject);
-		}
+		addCreateProjectLink();
 
 		load();
 
 		myLogger.info("projectModelList.size() =: " + projectModelList.size());
+	}
+
+	private void addCreateProjectLink() {
+		Link<String> createProject = new Link<String>("createProject") {
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void onClick() {
+				ProjectModel projectModel = new ProjectModel();
+				String title = "project unknown "
+						+ (System.currentTimeMillis() % 10000);
+				projectModel.setTitle(title);
+				addProjectModel(projectModel);
+				myLogger.info("projectModelList.size() =: "
+						+ projectModelList.size());
+				save();
+			}
+
+		};
+		add(createProject);
 	}
 
 	private void addProjectListSizeLabel() {
