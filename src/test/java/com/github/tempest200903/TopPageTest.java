@@ -52,6 +52,7 @@ public class TopPageTest {
 	@Test
 	public void topPageClickCreateProject() {
 		myLogger.info("topPageClickCreateProject begin");
+		// setup
 
 		// start and render the test page
 		TopPage topPage = tester.startPage(TopPage.class);
@@ -61,9 +62,12 @@ public class TopPageTest {
 
 		int sizeBeforeClick = topPage.projectModelList.size();
 
+		// exercise
 		Component createProjectLink = tester
 				.getComponentFromLastRenderedPage("createProject");
 		tester.clickLink(createProjectLink);
+
+		// verify
 		{
 			// projectModelList に要素が1個増えている
 			int expected = sizeBeforeClick + 1;

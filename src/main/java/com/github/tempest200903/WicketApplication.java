@@ -24,6 +24,8 @@ public class WicketApplication extends WebApplication {
 
 	private Datastore datastore;
 
+	private ProjectModelDAO projectModelDAO;
+
 	Datastore getDatastore() {
 		return datastore;
 	}
@@ -34,6 +36,10 @@ public class WicketApplication extends WebApplication {
 	@Override
 	public Class<? extends WebPage> getHomePage() {
 		return TopPage.class;
+	}
+
+	public ProjectModelDAO getProjectModelDAO() {
+		return projectModelDAO;
 	}
 
 	/**
@@ -59,6 +65,7 @@ public class WicketApplication extends WebApplication {
 		morphia.map(ProjectModel.class);
 		String dbName = "wbsestimate";
 		datastore = morphia.createDatastore(mongo, dbName);
+		projectModelDAO = new ProjectModelDAO(morphia, mongo, dbName);
 	}
-
+	
 }

@@ -22,6 +22,27 @@ import com.google.code.morphia.query.Query;
 
 public class TopPage extends WebPage {
 
+	private final class DeleteProjectLink extends Link<String> {
+
+		private final Item<ProjectModel> item;
+
+		private static final long serialVersionUID = 1L;
+
+		private DeleteProjectLink(String id, Item<ProjectModel> item) {
+			super(id);
+			this.item = item;
+		}
+
+		@Override
+		public void onClick() {
+			IModel<ProjectModel> model = item.getModel();
+			wicketProjectModelList.remove(model);
+			projectModelList.remove(model.getObject());
+			save();
+		}
+
+	}
+
 	final class ProjectListView extends RefreshingView<ProjectModel> {
 
 		private static final long serialVersionUID = 1L;
@@ -49,27 +70,6 @@ public class TopPage extends WebPage {
 			// item);
 			// item.add(readProjectLink);
 		}
-	}
-
-	private final class DeleteProjectLink extends Link<String> {
-
-		private final Item<ProjectModel> item;
-
-		private static final long serialVersionUID = 1L;
-
-		private DeleteProjectLink(String id, Item<ProjectModel> item) {
-			super(id);
-			this.item = item;
-		}
-
-		@Override
-		public void onClick() {
-			IModel<ProjectModel> model = item.getModel();
-			wicketProjectModelList.remove(model);
-			projectModelList.remove(model.getObject());
-			save();
-		}
-
 	}
 
 	private static final Logger myLogger = Logger.getLogger(TopPage.class
@@ -111,32 +111,53 @@ public class TopPage extends WebPage {
 		myLogger.info("projectModelList.size() =: " + projectModelList.size());
 	}
 
-	private Datastore getDatastore() {
-		WebApplication webApplication = WebApplication.get();
-		if (webApplication instanceof WicketApplication) {
-			WicketApplication wicketApplication = (WicketApplication) webApplication;
-			return wicketApplication.getDatastore();
-		}
-		throw new RuntimeException("missing WicketApplication");
-	}
-
-	void load() {
-		Query<ProjectModel> query = getDatastore().find(ProjectModel.class);
-		List<ProjectModel> queryProjectModelList = new ArrayList<ProjectModel>(
-				query.asList());
-		for (ProjectModel projectModel : queryProjectModelList) {
-			addProjectModel(projectModel);
-		}
-	}
-
 	private void addProjectModel(ProjectModel projectModel) {
 		projectModelList.add(projectModel);
 		Model<ProjectModel> model = Model.of(projectModel);
 		wicketProjectModelList.add(model);
 	}
 
+	private List<ProjectModel> fetchProjectModelList() {
+		Query<ProjectModel> query = getDatastore().find(ProjectModel.class);
+		List<ProjectModel> queryProjectModelList = new ArrayList<ProjectModel>(
+				query.asList());
+		return queryProjectModelList;
+	}
+
+	private Datastore getDatastore() {
+		WicketApplication wicketApplication = getWicketApplication();
+		return wicketApplication.getDatastore();
+	}
+
+	ProjectModelDAO getProjectModelDAO() {
+		return getWicketApplication().getProjectModelDAO();
+	}
+
+	private WicketApplication getWicketApplication() {
+		WebApplication webApplication = WebApplication.get();
+		if (webApplication instanceof WicketApplication) {
+			return (WicketApplication) webApplication;
+		}
+		throw new RuntimeException("missing WicketApplication");
+	}
+
+	void load() {
+		List<ProjectModel> queryProjectModelList = fetchProjectModelList();
+		for (ProjectModel projectModel : queryProjectModelList) {
+			addProjectModel(projectModel);
+		}
+	}
+
 	void save() {
-		getDatastore().save(projectModelList);
+		myLogger.info("save() begin");
+		myLogger.info("save() projectModelList.size() =: "
+				+ projectModelList.size());
+		for (ProjectModel projectModel : projectModelList) {
+			ProjectModelDAO projectModelDAO = getWicketApplication()
+					.getProjectModelDAO();
+			projectModelDAO.save(projectModel);
+		}
+		myLogger.info("save() end");
 	}
 
 }
