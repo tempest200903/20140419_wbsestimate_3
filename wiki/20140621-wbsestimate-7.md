@@ -289,6 +289,8 @@
 
 ### submit ボタンをページに設置する。 ###
 
+- [2014-06-25 水 00:37] commit
+
 ### Project name を変更して submit したら永続化する。 ###
 
 ## timelog ##
