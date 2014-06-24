@@ -4,7 +4,6 @@ import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
-import org.apache.wicket.markup.repeater.Item;
 import org.apache.wicket.model.Model;
 
 /**
@@ -12,8 +11,10 @@ import org.apache.wicket.model.Model;
  */
 public class ProjectPage extends WebPage {
 
-	public ProjectPage(Item<ProjectModel> item) {
-		final ProjectModel projectModel = item.getModelObject();
+	private ProjectModel projectModel;
+
+	public ProjectPage(ProjectModel projectModel) {
+		this.projectModel = projectModel;
 		String projectTitle = projectModel.getTitle();
 
 		Form<?> form = new Form<Object>("form1") {

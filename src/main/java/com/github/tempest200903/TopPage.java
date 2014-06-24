@@ -91,7 +91,8 @@ public class TopPage extends WebPage {
 
 		@Override
 		public void onClick() {
-			 WebPage next = new ProjectPage(item);
+			final ProjectModel projectModel = item.getModelObject();
+			 WebPage next = new ProjectPage(projectModel);
 			 setResponsePage(next);
 		}
 

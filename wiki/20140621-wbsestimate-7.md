@@ -262,6 +262,27 @@
 
 ## ProjectPage から TopPage に遷移するアンカーを設置する。 ##
 
+- [2014-06-24 火 23:58] commit
+
+## topPageLink をクリックしたら TopPage に遷移する。 ##
+
+- プロダクトコードでは、引数1個コンストラクタを使う。
+    - 例 com.github.tempest200903.TopPage.ReadProjectLink.onClick() { new ProjectPage(item); }
+- テストコードでは、コンストラクタではなく startPage() を使う。
+    - 例 tester.startPage(ProjectPage.class);
+- 疑問。テストコードで引数1個コンストラクタをテストしたい場合、どうすればいいのか？
+- 回答。 startPage(IPageProvider) を使えばよい。
+
+    ```
+    > ProjectModel projectModel = new ProjectModel();
+    > 		projectModel.setTitle("title123");
+    > 		Page page = new ProjectPage(projectModel);
+    > 		IPageProvider pageProvider = new PageProvider(page);
+    > 		ProjectPage projectPage = (ProjectPage) tester.startPage(pageProvider);
+    ```
+
+- [2014-06-25 水 00:30] commit
+
 ## timelog ##
 
 - [2014-06-21 土 18:14] begin
