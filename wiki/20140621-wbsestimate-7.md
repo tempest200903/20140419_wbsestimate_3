@@ -240,25 +240,27 @@
 ## Morphia DAO を使う。 ##
 
 - http://dayafterneet.blogspot.jp/2012/02/mongodbjavamorphia.html
-- [2014-06-23 月 19:16] commit
+- [2014-06-23 月 19:16] commit https://github.com/tempest200903/20140419_wbsestimate_3/commit/c1ade8a18874ba85819df3c34dd7b1630529197c
 
 ## delete project をクリックしたときデータベースからも削除する。 ##
 
 - save() で getDatastore().save(projectModelList); としてる。削除対象オブジェクトを保持しておいて、ここで削除する。
-- [2014-06-23 月 22:57] commit
+- [2014-06-23 月 22:57] commit https://github.com/tempest200903/20140419_wbsestimate_3/commit/865573790937cf3df0b33b0b0be38c4293cad497
 
 ## TopPage に project の個数を表示する。 ##
 
 - TopPage.addProjectListSizeLabel()
-- [2014-06-23 月 23:05] commit
+- [2014-06-23 月 23:05] commit https://github.com/tempest200903/20140419_wbsestimate_3/commit/6a8b218fd027d9bc9238a635d79ea038d3461c67
 
 ## リファクタリング Extract Method TopPage コンストラクタ ##
 
-- [2014-06-23 月 23:08] commit
+- [2014-06-23 月 23:08] commit https://github.com/tempest200903/20140419_wbsestimate_3/commit/f04d7612f48c20df26e157407d35a1acec7d148f
 
 ## read project link をクリックしたら ProjectPage に遷移する。 ##
 
-- [2014-06-23 月 23:26] commit
+- [2014-06-23 月 23:26] commit https://github.com/tempest200903/20140419_wbsestimate_3/commit/926c289f2517da922914d6bb8b6abf241436a6a1
+
+## ProjectPage から TopPage に遷移するアンカーを設置する。 ##
 
 ## timelog ##
 
@@ -276,3 +278,4 @@
 - [2014-06-23 月 19:17] end
 - [2014-06-23 月 22:48] begin
 - [2014-06-23 月 23:27] end
+- [2014-06-24 火 23:48] begin
