@@ -1,6 +1,9 @@
 package com.github.tempest200903;
 
+import java.util.logging.Logger;
+
 import org.apache.wicket.markup.html.WebPage;
+import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
@@ -10,6 +13,9 @@ import org.apache.wicket.model.Model;
  *
  */
 public class ProjectPage extends WebPage {
+
+	private static final Logger myLogger = Logger.getLogger(ProjectPage.class
+			.getName());
 
 	private ProjectModel projectModel;
 
@@ -25,6 +31,15 @@ public class ProjectPage extends WebPage {
 		final TextField<String> projectNameTextField = new TextField<String>(
 				"projectTitle", Model.of(projectTitle));
 		form.add(projectNameTextField);
+
+		Button projectSubmitButton = new Button("projectSubmit") {
+			private static final long serialVersionUID = 1L;
+
+			public void onSubmit() {
+				myLogger.info("projectSubmitButton");
+			}
+		};
+		form.add(projectSubmitButton);
 
 		BookmarkablePageLink<String> topPageLink = new BookmarkablePageLink<String>(
 				"topPageLink", TopPage.class);

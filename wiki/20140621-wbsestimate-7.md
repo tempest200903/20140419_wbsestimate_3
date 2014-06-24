@@ -141,41 +141,43 @@
 - file:F:\goat-pc-data\screenshot\2014\screenshot-g-000112.jpg
 - Project List に add という文字列のアンカーが1個置いてあるだけ。アンカーをクリックしても変化しない。
 
-## リファクタリング ProjectList を TopPage に変更 ##
+## TopPage ##
+
+### リファクタリング ProjectList を TopPage に変更 ###
 
 - https://github.com/tempest200903/20140419_wbsestimate_3/commit/2628574ef275dd3c277ec5147467b9b2f56c8d83
 
-## TopPage で Add Project をクリックしたら Project を1個追加する ##
+### TopPage で Add Project をクリックしたら Project を1個追加する ###
 
 - [2014-06-21 土 21:53] commit https://github.com/tempest200903/20140419_wbsestimate_3/commit/be6556053dc146c7194f9557fcba38476b15bd20
 
-## 「TopPage で Add Project をクリックしたら Project を1個追加する」をテストする ##
+### 「TopPage で Add Project をクリックしたら Project を1個追加する」をテストする ###
 
 - cf. [[2014-04-19-110855-wbsestimate-3]]
 - 「TopPage で Add Project をクリックしたら Project を1個追加する」をテストする。 TopPageTest.java を追加。
 - [2014-06-21 土 21:58] commit https://github.com/tempest200903/20140419_wbsestimate_3/commit/29b7d1154efb0753db33a475220e4d9a28a42d34
 
-## source format ##
+### source format ###
 
 - [2014-06-21 土 22:03] commit https://github.com/tempest200903/20140419_wbsestimate_3/commit/a6c24aa69a19ffab229b4b5d854068d833d0f203
 
-## topPageClickCreateProject() を追加。 TopPage で Create Project をクリックする。 ##
+### topPageClickCreateProject() を追加。 TopPage で Create Project をクリックする。 ###
 
 - [2014-06-21 土 22:10] commit https://github.com/tempest200903/20140419_wbsestimate_3/commit/94af3a0f5eeae2800f013e0ab4d230599f3f72a2
 
-## java.util.logging でログ出力する。 ##
+### java.util.logging でログ出力する。 ###
 
 - [2014-06-21 土 22:20] commit https://github.com/tempest200903/20140419_wbsestimate_3/commit/399263a11a3c983e7b5f6a21b85e2e0991f7030f
 
-## clickLink した後、 projectModelList に要素が1個増えていることを assert する。 ##
+### clickLink した後、 projectModelList に要素が1個増えていることを assert する。 ###
 
 - [2014-06-21 土 22:27] commit https://github.com/tempest200903/20140419_wbsestimate_3/commit/593b48df63fd5c67205aed8ec0f033cad5b9c4ce
 
-## ProjectModel にフィールド name を追加する。 ##
+### ProjectModel にフィールド name を追加する。 ###
 
 - [2014-06-21 土 22:29] commit https://github.com/tempest200903/20140419_wbsestimate_3/commit/798e24ab827967b9367cf41cb98599d4138e9190
 
-## ProjectModel を Morphia で永続化可能にする。 ##
+### ProjectModel を Morphia で永続化可能にする。 ###
 
 - cf. [[20140615-Morphia]]
 - http://dayafterneet.blogspot.jp/2012/02/mongodbjavamorphia.html
@@ -184,13 +186,13 @@
 - もし id を入れるなら、自分で new したときの id と、データベースから復元したときの id が重複しないような措置が要る。
 - [2014-06-21 土 23:02] commit https://github.com/tempest200903/20140419_wbsestimate_3/commit/9544b13d88030e1be4a68788f4df54c9c0bc9597
 
-## TopPageTest projectModelList を永続化していることをテストする。 ##
+### TopPageTest projectModelList を永続化していることをテストする。 ###
 
 - [2014-06-21 土 23:18] commit https://github.com/tempest200903/20140419_wbsestimate_3/commit/eda37657b90f5772091acc0e220349f99ee933d2
 - git push
 - 厳密に永続化テストするには、一度 JavaVM プロセスを終了して、再度プログラムを起動してから、復元できているかを検査するべき。 JUnit でこれを行うのはやや手間がかかるので、今回は簡略検査だけにする。
 
-## TopPageTest new する時に projectModelList を表示する。 ##
+### TopPageTest new する時に projectModelList を表示する。 ###
 
 - file:F:\goat-pc-data\screenshot\2014\screenshot-g-000113.jpg
 - 初回アクセス時に projectModelList を表示する。
@@ -200,20 +202,20 @@
     - mongodb オブジェクトと morphia オブジェクトの初期化は class TopPage ではなく、 class WicketApplication で行うべき。
 - [2014-06-22 日 18:53] commit https://github.com/tempest200903/20140419_wbsestimate_3/commit/899f700a74c0f4282bf9277e54435348d036d80c
 
-## WicketApplication で mongodb オブジェクトと morphia オブジェクトを初期化する。 ##
+### WicketApplication で mongodb オブジェクトと morphia オブジェクトを初期化する。 ###
 
 - WicketApplication インスタンスを得るにはどうすればいいのか？
     - 多分、これ。 org.apache.wicket.protocol.http.WebApplication.get()
 - [2014-06-22 日 20:42] commit https://github.com/tempest200903/20140419_wbsestimate_3/commit/57dfcc6573c476a0d001897f1232652feaa21437
 
-## create project をクリックしたとき表示を更新する。 ##
+### create project をクリックしたとき表示を更新する。 ###
 
 - com.github.tempest200903.TopPage.TopPage(...).new Link() {...}.onClick()
     - projectModelList.add(projectModel) と同時に、
       wicketProjectModelList.add(model) も行う。
 - [2014-06-22 日 20:55] commit https://github.com/tempest200903/20140419_wbsestimate_3/commit/14668b92cd4210d48dd02a18cf1e9cd9357440c2
 
-## dependency 追加 org.apache.commons commons-collections4 ##
+### dependency 追加 org.apache.commons commons-collections4 ###
 
 - F:\goat-pc-data\ecworkspace\20140621-wbsestimate-7\pom.xml
     - dependency 追加
@@ -223,7 +225,7 @@
 
 - [2014-06-22 日 23:25] commit https://github.com/tempest200903/20140419_wbsestimate_3/commit/9de58046f0a4a8dea64f6f3ef17eed5db3fdf4a9
 
-## delete project をクリックしたとき projectModelList から除去して表示を更新する。 ##
+### delete project をクリックしたとき projectModelList から除去して表示を更新する。 ###
 
 - RefreshingView から子 component を探し出すことはできたが、やや手間がかかる。
     - see com.github.tempest200903.TopPageTest.findDeleteProjectLink(ProjectListView)
@@ -231,40 +233,42 @@
     - delete project をクリックしたとき画面では project list から item が1個減っている。データベースには保存していない。再起動したら削除したつもりの item が残っている。
 - [2014-06-22 日 23:30] commit https://github.com/tempest200903/20140419_wbsestimate_3/commit/76c912f5aefbfc32de617deb5083ac4b6e34baae
 
-## save wiki ##
+### save wiki ###
 
 - F:\goat-pc-data\ecworkspace\20140621-wbsestimate-7\wiki\20140621-wbsestimate-7.md
 - https://github.com/tempest200903/20140419_wbsestimate_3/blob/morphia_first/wiki/20140621-wbsestimate-7.md
 - [2014-06-22 日 23:32] commit
 
-## Morphia DAO を使う。 ##
+### Morphia DAO を使う。 ###
 
 - http://dayafterneet.blogspot.jp/2012/02/mongodbjavamorphia.html
 - [2014-06-23 月 19:16] commit https://github.com/tempest200903/20140419_wbsestimate_3/commit/c1ade8a18874ba85819df3c34dd7b1630529197c
 
-## delete project をクリックしたときデータベースからも削除する。 ##
+### delete project をクリックしたときデータベースからも削除する。 ###
 
 - save() で getDatastore().save(projectModelList); としてる。削除対象オブジェクトを保持しておいて、ここで削除する。
 - [2014-06-23 月 22:57] commit https://github.com/tempest200903/20140419_wbsestimate_3/commit/865573790937cf3df0b33b0b0be38c4293cad497
 
-## TopPage に project の個数を表示する。 ##
+### TopPage に project の個数を表示する。 ###
 
 - TopPage.addProjectListSizeLabel()
 - [2014-06-23 月 23:05] commit https://github.com/tempest200903/20140419_wbsestimate_3/commit/6a8b218fd027d9bc9238a635d79ea038d3461c67
 
-## リファクタリング Extract Method TopPage コンストラクタ ##
+### リファクタリング Extract Method TopPage コンストラクタ ###
 
 - [2014-06-23 月 23:08] commit https://github.com/tempest200903/20140419_wbsestimate_3/commit/f04d7612f48c20df26e157407d35a1acec7d148f
 
-## read project link をクリックしたら ProjectPage に遷移する。 ##
+### read project link をクリックしたら ProjectPage に遷移する。 ###
 
 - [2014-06-23 月 23:26] commit https://github.com/tempest200903/20140419_wbsestimate_3/commit/926c289f2517da922914d6bb8b6abf241436a6a1
 
-## ProjectPage から TopPage に遷移するアンカーを設置する。 ##
+## ProjectPage ##
+
+### ProjectPage から TopPage に遷移するアンカーを設置する。 ###
 
 - [2014-06-24 火 23:58] commit
 
-## topPageLink をクリックしたら TopPage に遷移する。 ##
+### topPageLink をクリックしたら TopPage に遷移する。 ###
 
 - プロダクトコードでは、引数1個コンストラクタを使う。
     - 例 com.github.tempest200903.TopPage.ReadProjectLink.onClick() { new ProjectPage(item); }
@@ -282,6 +286,10 @@
     ```
 
 - [2014-06-25 水 00:30] commit
+
+### submit ボタンをページに設置する。 ###
+
+### Project name を変更して submit したら永続化する。 ###
 
 ## timelog ##
 
