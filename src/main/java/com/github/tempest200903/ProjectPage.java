@@ -7,7 +7,6 @@ import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
-import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.model.Model;
 
 /**
@@ -46,22 +45,10 @@ public class ProjectPage extends WebPage {
 		Button projectSubmitButton = new Button("projectSubmit") {
 			private static final long serialVersionUID = 1L;
 		};
-		Link<?> projectButton = new Link<Object>("projectButton") {
-			private static final long serialVersionUID = 1L;
-
-			@Override
-			public void onClick() {
-				myLogger.info("projectSubmitButton");
-				String projectTitle = projectNameTextField.getModelObject();
-				myLogger.info("onSubmit() # projectTitle =: " + projectTitle);
-				ProjectPage.this.projectModel.setTitle(projectTitle);
-			}
-		};
 
 		add(form);
 		form.add(projectNameTextField);
 		form.add(projectSubmitButton);
-		add(projectButton);
 
 		BookmarkablePageLink<String> topPageLink = new BookmarkablePageLink<String>(
 				"topPageLink", TopPage.class);

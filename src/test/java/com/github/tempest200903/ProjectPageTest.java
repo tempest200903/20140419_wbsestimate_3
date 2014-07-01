@@ -8,8 +8,6 @@ import org.apache.wicket.core.request.handler.IPageProvider;
 import org.apache.wicket.core.request.handler.PageProvider;
 import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.TextField;
-import org.apache.wicket.markup.html.link.Link;
-import org.apache.wicket.model.Model;
 import org.apache.wicket.util.tester.FormTester;
 import org.apache.wicket.util.tester.WicketTester;
 import org.junit.Before;
@@ -96,24 +94,11 @@ public class ProjectPageTest {
 		@SuppressWarnings("unused")
 		Button projectSubmitButton = (Button) tester
 				.getComponentFromLastRenderedPage("form1:projectSubmit");
-		Link projectButton = (Link) tester
-				.getComponentFromLastRenderedPage("projectButton");
-		// projectNameTextField.setModelObject(expected);
-		// projectNameTextField.setDefaultModelObject(expected);
-		// projectNameTextField.setModelValue(new String[]{expected});
-		// projectNameTextField.setConvertedInput(expected);
-		// projectNameTextField.setDefaultModel(Model.of(expected));
 		projectNameTextField.getModel().setObject(expected);
-		boolean b = true;
-		if (b) {
-			 tester.submitForm("form1");
-			 FormTester formTester = tester.newFormTester("form1", false);
-			 formTester.setValue("projectTitle", expected);
-			 formTester.submit();
-		} else {
-			tester.executeListener(projectButton);
-		}
-
+		tester.submitForm("form1");
+		FormTester formTester = tester.newFormTester("form1", false);
+		formTester.setValue("projectTitle", expected);
+		formTester.submit();
 
 		// verify
 		ProjectModel projectModel2 = projectPage.getProjectModel();

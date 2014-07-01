@@ -238,6 +238,7 @@
 - F:\goat-pc-data\ecworkspace\20140621-wbsestimate-7\wiki\20140621-wbsestimate-7.md
 - https://github.com/tempest200903/20140419_wbsestimate_3/blob/morphia_first/wiki/20140621-wbsestimate-7.md
 - [2014-06-22 日 23:32] commit
+- [2014-06-25 水 00:41] commit
 
 ### Morphia DAO を使う。 ###
 
@@ -266,7 +267,7 @@
 
 ### ProjectPage から TopPage に遷移するアンカーを設置する。 ###
 
-- [2014-06-24 火 23:58] commit
+- [2014-06-24 火 23:58] commit https://github.com/tempest200903/20140419_wbsestimate_3/commit/20b30dd5e720cb1d8b42d3298fe3741a40ff576b
 
 ### topPageLink をクリックしたら TopPage に遷移する。 ###
 
@@ -285,13 +286,26 @@
     > 		ProjectPage projectPage = (ProjectPage) tester.startPage(pageProvider);
     ```
 
-- [2014-06-25 水 00:30] commit
+- [2014-06-25 水 00:30] commit https://github.com/tempest200903/20140419_wbsestimate_3/commit/79d69ba5637a0f99617a1efe9e1c5349bb12420b
 
 ### submit ボタンをページに設置する。 ###
 
-- [2014-06-25 水 00:37] commit
+- [2014-06-25 水 00:37] commit https://github.com/tempest200903/20140419_wbsestimate_3/commit/f12cb86639f4b99e0c6004e5d5d443e87a529c3b
 
-### Project name を変更して submit したら永続化する。 ###
+### TextField の入力値を変更して submit したら Project に反映して永続化する。 ###
+
+- いろいろ試してみた結果判明したこと。
+    - Form.onSubmit() の中でその form の input 要素の model を参照すると、 null が返る。理由は不明。
+
+        ```
+        > 例
+        >     final TextField<String> projectNameTextField =
+        >     new TextField<String>("projectTitle", Model.of(projectTitle));
+        >     projectNameTextField.getModelObject();
+        ```
+- とりあえず今回は Form submit ではなく Link onClick の中でやることにした。
+- 再度デバッグ実行してみたら、 Form.onSubmit() は2回呼ばれる。 getModelObject() 返値 1回目は null , 2回目は not null であった。
+- [2014-06-29 日 22:43] commit https://github.com/tempest200903/20140419_wbsestimate_3/commit/9b4311a1b4148446d4c97445b9ac705e1acc75e8
 
 ## timelog ##
 
@@ -310,3 +324,6 @@
 - [2014-06-23 月 22:48] begin
 - [2014-06-23 月 23:27] end
 - [2014-06-24 火 23:48] begin
+- [2014-06-25 水 00:43] end
+- [2014-06-29 日 20:55] begin
+- [2014-06-29 日 22:44] end
