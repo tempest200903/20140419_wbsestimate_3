@@ -23,6 +23,10 @@ public class ProjectModel implements Serializable {
 	public ProjectModel() {
 	}
 
+	public ObjectId getOid() {
+		return oid;
+	}
+
 	public String getTitle() {
 		return title;
 	}

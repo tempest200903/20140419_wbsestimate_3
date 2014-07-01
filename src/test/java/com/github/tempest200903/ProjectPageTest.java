@@ -10,6 +10,7 @@ import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.util.tester.FormTester;
 import org.apache.wicket.util.tester.WicketTester;
+import org.bson.types.ObjectId;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -90,20 +91,30 @@ public class ProjectPageTest {
 		}
 
 		// exercise
-		String expected = "title456";
+		String expectedTitle2 = "title456";
 		@SuppressWarnings("unused")
 		Button projectSubmitButton = (Button) tester
 				.getComponentFromLastRenderedPage("form1:projectSubmit");
-		projectNameTextField.getModel().setObject(expected);
+		projectNameTextField.getModel().setObject(expectedTitle2);
 		tester.submitForm("form1");
 		FormTester formTester = tester.newFormTester("form1", false);
-		formTester.setValue("projectTitle", expected);
+		formTester.setValue("projectTitle", expectedTitle2);
 		formTester.submit();
 
-		// verify
+		// verify 1
 		ProjectModel projectModel2 = projectPage.getProjectModel();
-		String actual = projectModel2.getTitle();
-		assertThat(actual, is(expected));
+		String actualTitle = projectModel2.getTitle();
+		assertThat(actualTitle, is(expectedTitle2));
+
+		// verify 2
+		{
+			ProjectModelDAO projectModelDAO = projectPage.getProjectModelDAO();
+			ObjectId oid = projectModel2.getOid();
+			ProjectModel projectModel3 = projectModelDAO.get(oid);
+			String expectedTitle3 = projectModel3.getTitle();
+			String actualTitle3 = projectModel3.getTitle();
+			assertThat(actualTitle3, is(expectedTitle3));
+		}
 
 		myLogger.info("end");
 	}

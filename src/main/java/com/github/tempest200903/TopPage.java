@@ -15,7 +15,6 @@ import org.apache.wicket.model.AbstractReadOnlyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
-import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 import com.google.code.morphia.Datastore;
@@ -24,7 +23,7 @@ import com.google.code.morphia.query.Query;
 /**
  *
  */
-public class TopPage extends WebPage {
+public class TopPage extends MyWebPage {
 
 	private final class DeleteProjectLink extends Link<String> {
 
@@ -174,14 +173,6 @@ public class TopPage extends WebPage {
 
 	ProjectModelDAO getProjectModelDAO() {
 		return getWicketApplication().getProjectModelDAO();
-	}
-
-	private WicketApplication getWicketApplication() {
-		WebApplication webApplication = WebApplication.get();
-		if (webApplication instanceof WicketApplication) {
-			return (WicketApplication) webApplication;
-		}
-		throw new RuntimeException("missing WicketApplication");
 	}
 
 	void load() {

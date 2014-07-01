@@ -2,7 +2,6 @@ package com.github.tempest200903;
 
 import java.util.logging.Logger;
 
-import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
@@ -12,7 +11,7 @@ import org.apache.wicket.model.Model;
 /**
  *
  */
-public class ProjectPage extends WebPage {
+public class ProjectPage extends MyWebPage {
 
 	private static final Logger myLogger = Logger.getLogger(ProjectPage.class
 			.getName());
@@ -40,7 +39,9 @@ public class ProjectPage extends WebPage {
 				String projectTitle = projectNameTextField.getModelObject();
 				myLogger.info("onSubmit() # projectTitle =: " + projectTitle);
 				ProjectPage.this.projectModel.setTitle(projectTitle);
+				saveProjectModel();
 			}
+
 		};
 		Button projectSubmitButton = new Button("projectSubmit") {
 			private static final long serialVersionUID = 1L;
@@ -57,6 +58,18 @@ public class ProjectPage extends WebPage {
 
 	public ProjectModel getProjectModel() {
 		return projectModel;
+	}
+
+	ProjectModelDAO getProjectModelDAO() {
+		return getWicketApplication()
+				.getProjectModelDAO();
+	}
+
+	private void saveProjectModel() {
+		myLogger.info("begin");
+		ProjectModelDAO projectModelDAO = getProjectModelDAO();
+		projectModelDAO.save(projectModel);
+		myLogger.info("end");
 	}
 
 	// private String projectCollection = "project";
